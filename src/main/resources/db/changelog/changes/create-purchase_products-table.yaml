@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: gabrielPelosi
+      changes:
+        - createTable:
+            tableName: purchase_products
+            columns:
+              - column:
+                  name: products_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: fk_purchase_products_product
+                    references: product(id)
+                    nullable: false
+              - column:
+                  name: purchase_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: fk_purchase_products_order
+                    references: purchase(id)
+                    nullable: false
