@@ -30,6 +30,7 @@ public class ProductMapper {
                 .id(null)
                 .name(productRequest.getName())
                 .price(productRequest.getPrice())
+                .available(productRequest.getAvailable())
                 .category(new Category(productRequest.getCategoryId(), null)).build();
     }
 
@@ -38,6 +39,7 @@ public class ProductMapper {
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
+                .available(product.getAvailable())
                 .category(categoryMapper.toCategoryResponse(product.getCategory()));
     }
 

@@ -5,6 +5,7 @@ import com.online.loja.endpoint.ProductsApi;
 import com.online.loja.model.ProductRequest;
 import com.online.loja.model.ProductResponse;
 import com.online.loja.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class ProductController implements ProductsApi {
     private final ProductService productService;
     private final ProductMapper productMapper;
 
+    @Autowired
     public ProductController(ProductService productService,
                              ProductMapper productMapper) {
         this.productService = productService;
@@ -41,7 +43,7 @@ public class ProductController implements ProductsApi {
 
     @Override
     public ResponseEntity<List<ProductResponse>> getAllProducts() {
-        return ResponseEntity.ok(productService.getAllProducts()
+        return ResponseEntity.ok(productService.findAllProductsAvailable()
                 .stream()
                 .map(productMapper::toProductResponse)
                 .collect(Collectors.toList()));

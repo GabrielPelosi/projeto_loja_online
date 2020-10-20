@@ -2,6 +2,7 @@ package com.online.loja.service.serviceImpl;
 
 
 import com.online.loja.repository.ProductRepository;
+import com.online.loja.enums.AvailableTypes;
 import com.online.loja.repository.entity.Product;
 import com.online.loja.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return this.productRepository.findAll();
+    public List<Product> findAllProducts() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> findAllProductsAvailable() {
+        return this.productRepository.findAllByAvailable(AvailableTypes.AVAILABLE.toString());
     }
 
     @Override

@@ -7,7 +7,9 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    List<Product> getAllProducts();
+    List<Product> findAllProducts();
+
+    List<Product> findAllProductsAvailable();
 
     Optional<Product> getProductById(Long id);
 

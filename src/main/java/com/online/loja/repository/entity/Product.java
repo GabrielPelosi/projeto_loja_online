@@ -27,6 +27,8 @@ public class Product {
 
     private String name;
 
+    private String available;
+
     @ManyToOne
     private Category category;
 
