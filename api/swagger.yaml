@@ -280,6 +280,8 @@ components:
         price:
           type: number
           example: 11.9
+        available:
+          type: string
         categoryId:
           type: integer
           format: int64
@@ -294,6 +296,8 @@ components:
         price:
           type: number
           example: 11.9
+        available:
+          type: string
         category:
           $ref: '#/components/schemas/CategoryResponse'
     CategoryRequest:
