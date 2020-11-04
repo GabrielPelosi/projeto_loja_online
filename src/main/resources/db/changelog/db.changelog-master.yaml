@@ -7,3 +7,5 @@ databaseChangeLog:
       file: /db/changelog/changes/create-purchase-table.yaml
   - include:
       file: /db/changelog/changes/create-purchase_products-table.yaml
+  - include:
+      file: /db/changelog/changes/create-users-table.yaml
