@@ -22,6 +22,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: available
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: category_id
                   type: bigint
                   constraints:
