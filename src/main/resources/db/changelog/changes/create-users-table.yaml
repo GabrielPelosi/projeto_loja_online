@@ -16,35 +16,15 @@ databaseChangeLog:
               - column:
                   name: name
                   type: varchar(255)
-                  constraints:
-                    nullable: false
               - column:
                   name: email
                   type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: image_url
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
               - column:
                   name: email_verified
                   type: boolean
-                  constraints:
-                    nullable: false
               - column:
                   name: password
                   type: varchar(255)
-                  constraints:
-                    nullable: false
               - column:
-                  name: provider
+                  name: role
                   type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: provider_id
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
