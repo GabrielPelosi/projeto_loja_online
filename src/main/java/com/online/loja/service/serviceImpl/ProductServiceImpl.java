@@ -14,12 +14,9 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
-
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private  ProductRepository productRepository;
+
 
     @Override
     public List<Product> findAllProducts() {
@@ -32,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> getProductById(Long id) {
+    public Optional<Product> findProductById(Long id) {
         return this.productRepository.findById(id);
     }
 
