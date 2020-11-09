@@ -11,7 +11,7 @@ public interface ProductService {
 
     List<Product> findAllProductsAvailable();
 
-    Optional<Product> getProductById(Long id);
+    Optional<Product> findProductById(Long id);
 
     Optional<Product> updateProduct(Product product);
 
