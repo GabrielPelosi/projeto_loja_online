@@ -8,6 +8,8 @@ import com.online.loja.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,7 +29,9 @@ public class ProductController implements ProductsApi {
     }
 
 
+
     @Override
+    @PreAuthorize(value = "hasRole('ADMIN')")
     public ResponseEntity<ProductResponse> createProduct(ProductRequest productRequest) {
         var product = productMapper.toProductEntity(productRequest);
         var productResponse = productMapper.toProductResponse(productService.createProduct(product));
@@ -35,6 +39,7 @@ public class ProductController implements ProductsApi {
     }
 
     @Override
+    @PreAuthorize(value = "hasRole('ADMIN')")
     public ResponseEntity<Void> deleteProductById(Long productId) {
         return productService.deleteProductById(productId)
                 .map(res -> new ResponseEntity<Void>(HttpStatus.NO_CONTENT))
@@ -51,13 +56,14 @@ public class ProductController implements ProductsApi {
 
     @Override
     public ResponseEntity<ProductResponse> getProductById(Long productId) {
-        return productService.getProductById(productId)
+        return productService.findProductById(productId)
                 .map(productMapper::toProductResponse)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @Override
+    @PreAuthorize(value = "hasRole('ADMIN')")
     public ResponseEntity<ProductResponse> updateProductById(Long productId, ProductRequest productRequest) {
 
         var product = productMapper.toProductEntity(productRequest);
