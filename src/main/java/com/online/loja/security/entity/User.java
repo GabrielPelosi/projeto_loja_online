@@ -1,63 +1,51 @@
 package com.online.loja.security.entity;
 
-import com.online.loja.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
-import java.util.Collections;
 
-@Data
 @Entity
-@Builder
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_user")
+@Builder
 public class User implements UserDetails {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @Column(nullable = false)
     private String name;
 
-    @NotBlank
-    private String surname;
-
-    @NotBlank
+    @Email
+    @Column(nullable = false)
     private String email;
 
-    @NotBlank
+    @Column(nullable = false)
+    private Boolean emailVerified;
+
+    @Column(nullable = false)
     private String password;
 
-    @Builder.Default
-    private String userRole = UserRole.USER.toString();
-
-    @Builder.Default
-    private Boolean locked = false;
-
-    @Builder.Default
-    private Boolean enabled = false;
+    @Column(nullable = false)
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(userRole);
-        return Collections.singletonList(simpleGrantedAuthority);
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
+        return null;
     }
 
     @Override
@@ -72,7 +60,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return !locked;
+        return true;
     }
 
     @Override
@@ -82,6 +70,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return true;
     }
 }
