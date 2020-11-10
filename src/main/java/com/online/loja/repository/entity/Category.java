@@ -2,6 +2,7 @@ package com.online.loja.repository.entity;
 
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Slf4j
 public class Category {
 
     @Id
