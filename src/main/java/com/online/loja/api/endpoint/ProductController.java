@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.online.loja.security.config.SecurityConstants.HAS_ADMIN_ROLE;
+
 @RestController
 public class ProductController implements ProductsApi {
 
@@ -31,7 +33,7 @@ public class ProductController implements ProductsApi {
 
 
     @Override
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = HAS_ADMIN_ROLE)
     public ResponseEntity<ProductResponse> createProduct(ProductRequest productRequest) {
         var product = productMapper.toProductEntity(productRequest);
         var productResponse = productMapper.toProductResponse(productService.createProduct(product));
@@ -39,7 +41,7 @@ public class ProductController implements ProductsApi {
     }
 
     @Override
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = HAS_ADMIN_ROLE)
     public ResponseEntity<Void> deleteProductById(Long productId) {
         return productService.deleteProductById(productId)
                 .map(res -> new ResponseEntity<Void>(HttpStatus.NO_CONTENT))
@@ -63,7 +65,7 @@ public class ProductController implements ProductsApi {
     }
 
     @Override
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = HAS_ADMIN_ROLE)
     public ResponseEntity<ProductResponse> updateProductById(Long productId, ProductRequest productRequest) {
 
         var product = productMapper.toProductEntity(productRequest);
