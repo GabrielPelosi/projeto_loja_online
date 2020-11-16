@@ -54,9 +54,22 @@ public class ConfigWebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
+
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET,PRODUCTS_AVAILABLE_URL).permitAll()
+                .antMatchers(HttpMethod.GET,CATEGORY_GET_URL).permitAll()
                 .antMatchers(HttpMethod.POST,LOGIN_URL).permitAll()
+
+                .antMatchers(HttpMethod.POST,ADMIN_ONLY_URLS_POST_PUT_DELETE).hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.DELETE,ADMIN_ONLY_URLS_POST_PUT_DELETE).hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.PUT,ADMIN_ONLY_URLS_POST_PUT_DELETE).hasRole(HAS_ADMIN_ROLE)
+
+
+                .antMatchers(HttpMethod.POST,USER_ONLY_URLS_POST).hasRole(HAS_USER_ROLE)
+                .antMatchers(HttpMethod.POST,USER_ONLY_URLS_POST).hasRole(HAS_ADMIN_ROLE)
+
+                .antMatchers("/v2/api-docs").hasRole(HAS_ADMIN_ROLE)
+
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
