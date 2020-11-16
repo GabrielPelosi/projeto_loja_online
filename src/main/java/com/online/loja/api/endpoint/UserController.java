@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static com.online.loja.security.config.SecurityConstants.USER_ROLE_REGISTER;
+
 @RestController
 @RequestMapping("/users")
 @CrossOrigin
@@ -38,7 +40,7 @@ public class UserController {
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
                 .password(registerRequest.getPassword())
-                .role(SecurityConstants.HAS_USER_ROLE)
+                .role(USER_ROLE_REGISTER)
                 .emailVerified(false)
                 .build();
         return ResponseEntity.ok(userDetailsService.registerUser(user));
