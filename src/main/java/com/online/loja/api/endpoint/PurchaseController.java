@@ -8,6 +8,7 @@ import com.online.loja.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import static com.online.loja.security.config.SecurityConstants.HAS_ADMIN_ROLE;
 import static com.online.loja.security.config.SecurityConstants.HAS_USER_ROLE;
 
 @RestController
+@CrossOrigin
 public class PurchaseController implements PurchasesApi {
 
     private final PurchaseMapper purchaseMapper;
@@ -33,7 +35,6 @@ public class PurchaseController implements PurchasesApi {
     }
 
     @Override
-    @PreAuthorize(value = HAS_USER_ROLE)
     public ResponseEntity<PurchaseResponse> createPurchase(@Valid PurchaseRequest purchaseRequest) {
         var purchase = purchaseMapper.toPurchaseEntity(purchaseRequest);
         var purchaseResponse = purchaseMapper.toPurchaseResponse(purchaseService.createOrder(purchase));
@@ -41,7 +42,6 @@ public class PurchaseController implements PurchasesApi {
     }
 
     @Override
-    @PreAuthorize(value = HAS_ADMIN_ROLE)
     public ResponseEntity<List<PurchaseResponse>> getAllPurchases() {
         return ResponseEntity
                 .ok(purchaseService.getAllOrders()
@@ -51,7 +51,6 @@ public class PurchaseController implements PurchasesApi {
     }
 
     @Override
-    @PreAuthorize(value = HAS_ADMIN_ROLE)
     public ResponseEntity<PurchaseResponse> getPurchaseById(Long purchaseId) {
         return purchaseService
                 .getOrderById(purchaseId)
