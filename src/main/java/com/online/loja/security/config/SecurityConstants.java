@@ -10,7 +10,7 @@ public class SecurityConstants {
 
     public static final String PRODUCTS_AVAILABLE_URL = "/products";
     public static final String LOGIN_URL = "/users/login";
-    public static final String HAS_ADMIN_ROLE = "hasRole('ROLE_ADMIN')";
-    public static final String HAS_USER_ROLE = "hasRole('ROLE_USER')";
+    public static final String HAS_ADMIN_ROLE = "ROLE_ADMIN";
+    public static final String HAS_USER_ROLE = "ROLE_USER";
 
 }
