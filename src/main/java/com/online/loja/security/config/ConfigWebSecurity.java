@@ -56,7 +56,7 @@ public class ConfigWebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET,PRODUCTS_AVAILABLE_URL).permitAll()
-                .antMatchers(LOGIN_URL).permitAll()
+                .antMatchers(HttpMethod.POST,LOGIN_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
