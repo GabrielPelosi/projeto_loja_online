@@ -9,6 +9,7 @@ import com.online.loja.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 import static com.online.loja.security.config.SecurityConstants.HAS_ADMIN_ROLE;
 
 @RestController
+@CrossOrigin
 public class CategoryController implements CategoriesApi {
 
     private final CategoryService categoryService;
@@ -33,7 +35,6 @@ public class CategoryController implements CategoriesApi {
 
 
     @Override
-    @PreAuthorize(value = HAS_ADMIN_ROLE)
     public ResponseEntity<CategoryResponse> createCategory(CategoryRequest categoryRequest) {
         var category = categoryMapper.toCategoryEntity(categoryRequest);
         var categoryResponse = categoryMapper.toCategoryResponse(categoryService.createCategory(category));
@@ -41,7 +42,6 @@ public class CategoryController implements CategoriesApi {
     }
 
     @Override
-    @PreAuthorize(value = HAS_ADMIN_ROLE)
     public ResponseEntity<Void> deleteCategoryById(Long categoryId) {
         return categoryService.deleteCategoryById(categoryId)
                 .map(res -> new ResponseEntity<Void>(HttpStatus.NO_CONTENT))
@@ -65,7 +65,6 @@ public class CategoryController implements CategoriesApi {
     }
 
     @Override
-    @PreAuthorize(value = HAS_ADMIN_ROLE)
     public ResponseEntity<CategoryResponse> updateCategoryById(Long categoryId, CategoryRequest categoryRequest) {
 
         var category = categoryMapper.toCategoryEntity(categoryRequest);
