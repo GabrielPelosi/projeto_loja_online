@@ -8,9 +8,14 @@ public class SecurityConstants {
     public static final String HEADER_STRING = "Authorization";
     public static final String SIGN_UP_URL = "/users/register";
 
-    public static final String PRODUCTS_AVAILABLE_URL = "/products";
+    public static final String PRODUCTS_AVAILABLE_URL = "/products/**";
     public static final String LOGIN_URL = "/users/login";
-    public static final String HAS_ADMIN_ROLE = "ROLE_ADMIN";
-    public static final String HAS_USER_ROLE = "ROLE_USER";
+    public static final String CATEGORY_GET_URL = "/categories/**";
+    public static final String ADMIN_ONLY_URLS_POST_PUT_DELETE[] = {"/categories","/products","/purchases"};
+    public static final String USER_ONLY_URLS_POST[] = {"/purchases"};
+    public static final String HAS_ADMIN_ROLE = "ADMIN";
+    public static final String HAS_USER_ROLE = "USER";
+
+    public  static final String USER_ROLE_REGISTER = "ROLE_USER";
 
 }
