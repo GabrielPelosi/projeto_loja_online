@@ -324,6 +324,8 @@ components:
           example: 11.9
         status:
           type: string
+        emailUser:
+          type: string
         products:
           type: array
           items:
@@ -335,6 +337,8 @@ components:
           type: number
           example: 11.9
         status:
+          type: string
+        emailUser:
           type: string
         productsId:
           type: array
