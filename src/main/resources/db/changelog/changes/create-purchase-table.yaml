@@ -23,3 +23,8 @@ databaseChangeLog:
                   type: VARCHAR(24)
                   constraints:
                     nullable: false
+              - column:
+                  name: email_user
+                  type: VARCHAR(24)
+                  constraints:
+                    nullable: false
