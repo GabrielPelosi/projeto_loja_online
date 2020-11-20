@@ -36,6 +36,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
+    public List<Purchase> getAllPurchasesByEmailUser(String emailUser) {
+        return purchaseRepository.findByEmailUser(emailUser);
+    }
+
+    @Override
     public Optional<Purchase> updateOrder(Purchase purchase) {
         return purchaseRepository.findById(purchase.getId())
                 .map(p -> purchase)
