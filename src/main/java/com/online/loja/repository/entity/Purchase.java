@@ -29,6 +29,8 @@ public class Purchase {
 
     private String status;
 
+    private String emailUser;
+
     @ManyToMany
     private List<Product> products;
 
