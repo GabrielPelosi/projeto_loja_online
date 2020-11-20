@@ -3,7 +3,6 @@ package com.online.loja.api.endpoint;
 import com.online.loja.payload.LoginRequest;
 import com.online.loja.payload.LoginResponse;
 import com.online.loja.payload.RegisterRequest;
-import com.online.loja.security.config.SecurityConstants;
 import com.online.loja.security.config.jwt.JwtTokenUtil;
 import com.online.loja.security.entity.User;
 import com.online.loja.security.service.CustomUserDetailsService;
@@ -13,10 +12,16 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.online.loja.security.config.SecurityConstants.ADMIN_ROLE_REGISTER;
 import static com.online.loja.security.config.SecurityConstants.USER_ROLE_REGISTER;
 
 @RestController
@@ -36,6 +41,7 @@ public class UserController {
 
     @PostMapping("register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid RegisterRequest registerRequest){
+
         User user = User.builder()
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
@@ -67,6 +73,19 @@ public class UserController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+
+    @GetMapping("profile")
+    public ResponseEntity<?> getCurrentUser(){
+        Authentication auyh = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok(auyh.getPrincipal());
+    }
+
+
+    @GetMapping("profile-admin")
+    public ResponseEntity<?> getCurrentAdminUser(){
+        Authentication auyh = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok(auyh.getPrincipal());
     }
 
 }
