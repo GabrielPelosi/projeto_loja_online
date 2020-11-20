@@ -25,6 +25,7 @@ public class PurchaseMapper {
         return Purchase.builder().id(null)
                 .status(purchaseRequest.getStatus())
                 .price(purchaseRequest.getPrice())
+                .emailUser(purchaseRequest.getEmailUser())
                 .products(productService.findAllProductsById(purchaseRequest.getProductsId()))
                 .build();
     }
@@ -35,6 +36,7 @@ public class PurchaseMapper {
                 .id(purchase.getId())
                 .price(purchase.getPrice())
                 .status(purchase.getStatus())
+                .emailUser(purchase.getEmailUser())
                 .products(productMapper.toProductResponseList(purchase.getProducts()));
     }
 }
