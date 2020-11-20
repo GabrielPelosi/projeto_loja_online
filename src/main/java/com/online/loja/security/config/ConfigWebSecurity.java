@@ -60,13 +60,28 @@ public class ConfigWebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,CATEGORY_GET_URL).permitAll()
                 .antMatchers(HttpMethod.POST,LOGIN_URL).permitAll()
 
-                .antMatchers(HttpMethod.POST,ADMIN_ONLY_URLS_POST_PUT_DELETE).hasRole(HAS_ADMIN_ROLE)
-                .antMatchers(HttpMethod.DELETE,ADMIN_ONLY_URLS_POST_PUT_DELETE).hasRole(HAS_ADMIN_ROLE)
-                .antMatchers(HttpMethod.PUT,ADMIN_ONLY_URLS_POST_PUT_DELETE).hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.PUT,"/purchases").hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.DELETE,"/purchases").hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET,"/purchases").hasRole(HAS_ADMIN_ROLE)
+
+                .antMatchers(HttpMethod.POST,"/purchases").hasRole(HAS_USER_ROLE)
+
+                .antMatchers(HttpMethod.PUT,"/categories").hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.DELETE,"/categories").hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.POST,"/categories").hasRole(HAS_ADMIN_ROLE)
+
+                .antMatchers(HttpMethod.PUT,"/products").hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.DELETE,"/products").hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.POST,"/products").hasRole(HAS_ADMIN_ROLE)
+
+                .antMatchers(HttpMethod.POST,"/purchases").hasRole(HAS_USER_ROLE)
+                .antMatchers(HttpMethod.GET,"/purchases-user").hasRole(HAS_USER_ROLE)
 
 
-                .antMatchers(HttpMethod.POST,USER_ONLY_URLS_POST).hasRole(HAS_USER_ROLE)
-                .antMatchers(HttpMethod.POST,USER_ONLY_URLS_POST).hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET,PROFILE_ADMIN_URL).hasRole(HAS_ADMIN_ROLE)
+                .antMatchers(HttpMethod.POST,PROFILE_URL).hasRole(HAS_USER_ROLE)
+
+
 
                 .antMatchers("/v2/api-docs").hasRole(HAS_ADMIN_ROLE)
 
