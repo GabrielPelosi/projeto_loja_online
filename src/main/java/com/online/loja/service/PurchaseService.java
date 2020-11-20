@@ -18,4 +18,6 @@ public interface PurchaseService {
     Optional<Boolean> deleteOrderById(Long id);
 
     Purchase createOrder(Purchase purchase);
+
+    List<Purchase> getAllPurchasesByEmailUser(String emailUser);
 }
