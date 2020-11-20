@@ -4,14 +4,15 @@ import com.online.loja.api.mapper.PurchaseMapper;
 import com.online.loja.endpoint.PurchasesApi;
 import com.online.loja.model.PurchaseRequest;
 import com.online.loja.model.PurchaseResponse;
+import com.online.loja.payload.PurchaseUserRequest;
+import com.online.loja.repository.entity.Purchase;
 import com.online.loja.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -57,6 +58,15 @@ public class PurchaseController implements PurchasesApi {
                 .map(purchaseMapper::toPurchaseResponse)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/purchases-user")
+    public ResponseEntity<List<PurchaseResponse>> getPurchasesByUser(@RequestBody @Valid PurchaseUserRequest purchaseUserRequest){
+        return ResponseEntity
+                .ok(purchaseService.getAllPurchasesByEmailUser(purchaseUserRequest.getEmailUser())
+                    .stream()
+                        .map(purchaseMapper::toPurchaseResponse).collect(Collectors.toList()));
     }
 
 }
