@@ -1,6 +1,7 @@
 package com.online.loja.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.online.loja.repository.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -43,6 +44,9 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String role;
+
+    @OneToOne
+    private Address address;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
