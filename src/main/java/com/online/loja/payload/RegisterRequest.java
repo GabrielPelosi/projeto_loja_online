@@ -1,5 +1,6 @@
 package com.online.loja.payload;
 
+import com.online.loja.repository.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +20,21 @@ public class RegisterRequest {
     private String email;
     @NotNull
     private String password;
+
+    @NotNull
+    private String address;
+
+    @NotNull
+    private String neighborhood;
+
+    @NotNull
+    private String postalCode;
+
+    @NotNull
+    private String city;
+
+    @NotNull
+    private String state;
+
 
 }
