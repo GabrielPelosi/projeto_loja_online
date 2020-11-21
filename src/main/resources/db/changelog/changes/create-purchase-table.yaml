@@ -28,3 +28,11 @@ databaseChangeLog:
                   type: VARCHAR(24)
                   constraints:
                     nullable: false
+              - column:
+                  name: address_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: fk_purchase_address
+                    references: address(id)
+                    nullable: false
