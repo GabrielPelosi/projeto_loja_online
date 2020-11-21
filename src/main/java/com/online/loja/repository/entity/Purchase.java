@@ -10,6 +10,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -25,13 +27,26 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @NotBlank
     private BigDecimal price;
 
+    @NotNull
+    @NotBlank
     private String status;
 
+    @NotNull
+    @NotBlank
     private String emailUser;
 
+    @OneToOne
+    @NotNull
+    @NotBlank
+    private Address address;
+
     @ManyToMany
+    @NotNull
+    @NotBlank
     private List<Product> products;
 
 }
