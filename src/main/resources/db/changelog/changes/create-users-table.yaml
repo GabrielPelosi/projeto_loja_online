@@ -28,3 +28,11 @@ databaseChangeLog:
               - column:
                   name: role
                   type: varchar(255)
+              - column:
+                  name: address_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: fk_user_address
+                    references: address(id)
+                    nullable: false
