@@ -3,9 +3,12 @@ package com.online.loja.api.endpoint;
 import com.online.loja.payload.LoginRequest;
 import com.online.loja.payload.LoginResponse;
 import com.online.loja.payload.RegisterRequest;
+import com.online.loja.repository.AddressRepository;
+import com.online.loja.repository.entity.Address;
 import com.online.loja.security.config.jwt.JwtTokenUtil;
 import com.online.loja.security.entity.User;
 import com.online.loja.security.service.CustomUserDetailsService;
+import com.online.loja.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,17 +41,28 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private AddressService addressService;
+
 
     @PostMapping("register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid RegisterRequest registerRequest){
+        Address userAddress = Address.builder().address(registerRequest.getAddress())
+                .city(registerRequest.getCity())
+                .neighborhood(registerRequest.getNeighborhood())
+                .postalCode(registerRequest.getPostalCode())
+                .state(registerRequest.getState()).build();
 
         User user = User.builder()
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
                 .password(registerRequest.getPassword())
                 .role(USER_ROLE_REGISTER)
+                .address(userAddress)
                 .emailVerified(false)
                 .build();
+
+        addressService.createAddress(userAddress);
         return ResponseEntity.ok(userDetailsService.registerUser(user));
     }
 
