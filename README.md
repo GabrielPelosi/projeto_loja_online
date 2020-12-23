@@ -20,7 +20,7 @@ Esse projeto foi desenvolvido em Spring boot para atender uma necessidade fictí
 * Realizar pedidos
 * Ver todos os seus pedidos já concluidos
 
-[Link para acessar o backlog](https://github.com/GabrielPelosi/projeto_loja_online/projects/1)
+## [Link para acessar o backlog](https://github.com/GabrielPelosi/projeto_loja_online/projects/1)
 
 # Requisitos funcionais
   * Open api para gerar os endpoints e os modelos de requisição e resposta da api.
