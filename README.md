@@ -12,18 +12,22 @@ Esse projeto foi desenvolvido em Spring boot para atender uma necessidade fictí
 * Editar categorias como admin
 * Remover categorias como admin
 * Verificar todos os pedidos independente do estado como admin
+* Ver todas as categories registradas.
 #### Funcionalidades para utilizadores não registrados
 * Registrar como utilizador
 * Ver os produtos
-* Ver as categorias
 #### Funcionalidades para utilizadores registrados
 * Realizar pedidos
-* Acompanhar seu pedido realizado
 * Ver todos os seus pedidos já concluidos
 
-# Infraestrutura
+[Link para acessar o backlog](https://github.com/GabrielPelosi/projeto_loja_online/projects/1)
 
-A api desenvolvida utilizou banco de dados postgres, docker para ambiente de desonvolvimento e dependencias do spring para manipular os dados e garantir a segurança do servidor.
+# Requisitos funcionais
+  * Open api para gerar os endpoints e os modelos de requisição e resposta da api.
+  * Docker para configurar e rodas o banco de dados.
+  * Linguagem utilizada *Java*
+  * Framework para desenvolvimento *Spring Boot*
+  * Gerenciamento do banco de dados foi feito com Liquibase
 
 # Execução em ambiente de desenvolvimento
 
