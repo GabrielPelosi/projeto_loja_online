@@ -9,10 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import javax.validation.ConstraintViolationException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataJpaTest
-@DisplayName("Test to Category Repositry")
+@DisplayName("Test to Category Repository")
 class CategoryRepositoryTest {
 
     @Autowired
