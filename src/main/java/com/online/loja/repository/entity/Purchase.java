@@ -6,13 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,7 @@ public class Purchase {
 
     @NotNull
     @NotBlank
+    @Transient
     private BigDecimal price;
 
     @NotNull
@@ -49,4 +51,18 @@ public class Purchase {
     @NotBlank
     private List<Product> products;
 
+    @CreatedDate
+    private OffsetDateTime createdAt;
+
+    @LastModifiedDate
+    private OffsetDateTime updatedAt;
+
+
+    public BigDecimal getCalculatePrice(List<Product> products) {
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (Product prod : products){
+            totalPrice.add(prod.getPrice());
+        }
+        return totalPrice;
+    }
 }

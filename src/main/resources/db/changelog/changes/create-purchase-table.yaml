@@ -14,11 +14,6 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: price
-                  type: DECIMAL(12,2)
-                  constraints:
-                    nullable: false
-              - column:
                   name: status
                   type: VARCHAR(24)
                   constraints:
@@ -36,3 +31,9 @@ databaseChangeLog:
                     foreignKeyName: fk_purchase_address
                     references: address(id)
                     nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+              - column:
+                  name: updated_at
+                  type: datetime

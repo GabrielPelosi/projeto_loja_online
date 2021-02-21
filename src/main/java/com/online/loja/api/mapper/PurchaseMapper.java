@@ -29,7 +29,6 @@ public class PurchaseMapper {
     public Purchase toPurchaseEntity(PurchaseRequest purchaseRequest){
         return Purchase.builder().id(null)
                 .status(purchaseRequest.getStatus())
-                .price(purchaseRequest.getPrice())
                 .emailUser(purchaseRequest.getEmailUser())
                 .address(addressService.getAddressById(purchaseRequest.getAddressId()).get())
                 .products(productService.findAllProductsById(purchaseRequest.getProductsId()))
@@ -40,7 +39,6 @@ public class PurchaseMapper {
     public PurchaseResponse toPurchaseResponse(Purchase purchase){
         return new PurchaseResponse()
                 .id(purchase.getId())
-                .price(purchase.getPrice())
                 .status(purchase.getStatus())
                 .emailUser(purchase.getEmailUser())
                 .address(new Address().id(purchase.getAddress().getId())

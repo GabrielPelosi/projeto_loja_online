@@ -31,7 +31,7 @@ public class ProductMapper {
                 .name(productRequest.getName())
                 .price(productRequest.getPrice())
                 .available(productRequest.getAvailable())
-                .category(new Category(productRequest.getCategoryId(), null)).build();
+                .category(categoryService.getCategoryById(productRequest.getCategoryId()).get()).build();
     }
 
     public ProductResponse toProductResponse(Product product){
